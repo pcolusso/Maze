@@ -59,6 +59,7 @@
     <Compile Include="IState.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="VertexBufferObject.cs" />
+    <Compile Include="MenuState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config">

@@ -5,18 +5,19 @@ namespace Maze
 {
 	public class Start : GameWindow
 	{
-		IState Game;
+		IState Game, Menu;
 		
 		public Start ()
 			: base(1200, 700, new GraphicsMode(32, 22, 0, 0), "Maze")
 		{
 			Game = new GameState();
+			Menu = new MenuState();
 		}
 		
 		protected override void OnLoad (EventArgs e)
 		{
 			base.OnLoad (e);
-			Game.Load(ClientRectangle);
+			Menu.Load(ClientRectangle);
 		}
 		
 		protected override void OnResize (EventArgs e)
@@ -27,13 +28,13 @@ namespace Maze
 		protected override void OnUpdateFrame (FrameEventArgs e)
 		{
 			base.OnUpdateFrame (e);
-			Game.Update();
+			Menu.Update();
 		}
 		
 		protected override void OnRenderFrame (FrameEventArgs e)
 		{
 			base.OnRenderFrame (e);
-			Game.Draw();
+			Menu.Draw();
 			SwapBuffers();
 		}
 		
