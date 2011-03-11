@@ -10,20 +10,6 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Maze
 {
-	struct VBO2d
-	{
-		private int bufferHandle, points;
-		public VBO2d(Vector3[] verts)
-		{
-			points = verts.Length;
-			GL.GenBuffers(1, out bufferHandle);
-			GL.BindBuffer(BufferTarget.ArrayBuffer, bufferHandle);
-			GL.BufferData<Vector3>(BufferTarget.ArrayBuffer, (IntPtr) (points * Vector3.SizeInBytes), verts, BufferUsageHint.StaticDraw);
-		}
-		
-		public int dataHandle { get { return bufferHandle; } }
-		public int Points { get { return points; } }
-	}
 	
     class View : GameWindow
     {
@@ -35,11 +21,11 @@ namespace Maze
 		bool Alive;
 
         public View()
-            : base(700, 700, new GraphicsMode(32, 22, 0, 0), "Maze")
+            : base(1200, 700, new GraphicsMode(32, 22, 0, 0), "Maze")
         {
 			Alive = true;
 
-            labrynth = new DepthFirstMaze(201,201);
+            labrynth = new DepthFirstMaze(99,99);
             
             if (RotateCamera)
 			    new Thread(new ThreadStart(SpinPlane)).Start();
@@ -53,12 +39,14 @@ namespace Maze
             base.OnLoad(e);
 
             GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
-            Projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, 1, 1, 50);
+            //Projection = Matrix4.CreateOrthographic(ClientRectangle.Width, ClientRectangle.Height, 1, 100);
+			Projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, 1, 1, 50);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(ref Projection);
 			
 			LoadMazeIntoVBO();
-			
+
+            
 			
 			//GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
         }
@@ -110,9 +98,7 @@ namespace Maze
 		
 		#region 2dVBOs
 		void LoadMazeIntoVBO()
-		{
-			long time = System.DateTime.Now.Ticks;
-			
+		{	
 			List<Vector3> VertsToDraw = new List<Vector3>();
             bool left;
 			
@@ -165,7 +151,6 @@ namespace Maze
 		{
 			//Reduced to two draw calls!
 			GL.EnableClientState(ArrayCap.VertexArray);
-			
 			GL.PushMatrix();
             GL.Scale(labrynth.ScaleFactor);
             GL.Translate(labrynth.CenterTranslation);
@@ -174,6 +159,7 @@ namespace Maze
 			GL.VertexPointer(3, VertexPointerType.Float, sizeof(float) * 3, 0);
 			
 			GL.DrawArrays(BeginMode.Quads, 0, maze2d.Points);
+			
 			GL.PopMatrix();
 			
 			GL.DisableClientState(ArrayCap.VertexArray);
@@ -195,7 +181,7 @@ namespace Maze
 			}
 		}
 
-        public static void Main()
+        public static void Msain()
         {
             View v = new View();
             v.Run();

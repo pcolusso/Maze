@@ -1,15 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Maze/Maze.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Maze/View.cs">
     <Files>
-      <File FileName="Maze/View.cs" Line="13" Column="23" />
-      <File FileName="Maze/Maze.cs" Line="12" Column="24" />
+      <File FileName="Maze/View.cs" Line="106" Column="1" />
+      <File FileName="Maze/DepthFirstMaze.cs" Line="60" Column="1" />
+      <File FileName="Maze/PrimMaze.cs" Line="44" Column="1" />
+      <File FileName="Maze/VertexBufferManager.cs" Line="55" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Maze" expanded="True">
-            <Node name="Maze.cs" selected="True" />
+            <Node name="View.cs" selected="True" />
           </Node>
         </State>
       </Pad>
